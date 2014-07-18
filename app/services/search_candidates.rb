@@ -48,10 +48,8 @@ class SearchCandidates
     end
     jobs.each do |job|
       next if job.blank?
-      candidate_jobs = CandidateJob.all(:job_id => job.id)
-      next if candidate_jobs.blank?
-      candidate_jobs.each do |cj|
-        candidate = cj.candidate
+      candidates = Candidate.joins(:candidate_job).where(candidate_jobs: {job_id: job.id})
+      candidates.each do |candidate|
         if candidate.is_deleted == false && candidate.is_completed == true && candidate.organization_id == current_user.organization_id
           found = false
           unless @candidates.blank?
