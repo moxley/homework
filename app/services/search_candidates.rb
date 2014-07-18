@@ -48,19 +48,24 @@ class SearchCandidates
     end
     jobs.each do |job|
       next if job.blank?
-      candidates = Candidate.joins(:candidate_job).where(candidate_jobs: {job_id: job.id})
-      candidates.each do |candidate|
-        if candidate.is_deleted == false && candidate.is_completed == true && candidate.organization_id == current_user.organization_id
-          found = false
-          @candidates.each do |cand|
-            if cand.email_address == candidate.email_address
-              found = true
-            end
-          end
 
-          if found == false
-            @candidates << candidate
+      candidates = Candidate.
+        joins(:candidate_job).
+        where(candidate_jobs: {job_id: job.id}).
+        where(is_deleted:      false,
+              is_completed:    true,
+              organization_id: current_user.organization_id)
+
+      candidates.each do |candidate|
+        found = false
+        @candidates.each do |cand|
+          if cand.email_address == candidate.email_address
+            found = true
           end
+        end
+
+        if found == false
+          @candidates << candidate
         end
       end
     end
