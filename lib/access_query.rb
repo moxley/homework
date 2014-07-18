@@ -6,8 +6,9 @@ class AccessQuery
   end
 
   def access_type(user, resource_name)
+    # Ordered by level
     rus = resource_queries.resource_users(user, resource_name)
-    ru = rus.first
+    ru = rus.last
     if ru
       ru.role
     else

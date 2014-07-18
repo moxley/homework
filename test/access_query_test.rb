@@ -25,6 +25,14 @@ describe AccessQuery do
           access_query.access_type(user, "resource_foo").must_equal :user
         end
       end
+
+      it "is :admin when ResourceUser is :admin, and parent is :user" do
+        root_resource_user = ResourceUser.new(user, 'resource_root', :user)
+        resource_user.role = :admin
+        resource_queries.stub :resource_users, [root_resource_user, resource_user] do
+          access_query.access_type(user, "resource_foo").must_equal :admin
+        end
+      end
     end
   end
 end
