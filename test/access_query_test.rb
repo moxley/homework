@@ -9,7 +9,9 @@ describe AccessQuery do
 
   describe '#access_type' do
     it "is :denied by default" do
-      access_query.access_type(user, "resource_foo").must_equal :denied
+      resource_queries.stub :resource_users, [] do
+        access_query.access_type(user, "resource_foo").must_equal :denied
+      end
     end
 
     it "is :user when a ResourceUser with :user is found" do
