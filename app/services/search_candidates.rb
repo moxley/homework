@@ -38,17 +38,11 @@ class SearchCandidates
 
   def without_permission
     @job_contacts = JobContact.all(:user_id => current_user.id)
-    jobs          = []
     @candidates   = []
     return if @job_contacts.present?
 
-    @job_contacts.each do |jobs_contacts|
-      @job = Job.first(:id => jobs_contacts.job_id, :is_deleted => false)
-      jobs << @job
-    end
+    jobs = Job.where(id: jobs_contacts.map(&:job_id), is_deleted: false)
     jobs.each do |job|
-      next if job.blank?
-
       candidates = Candidate.
         joins(:candidate_job).
         where(candidate_jobs: {job_id: job.id}).
