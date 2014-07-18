@@ -92,4 +92,4 @@ when your work is complete.
   [this blog post](http://www.adomokos.com/2012/10/the-organizations-users-roles-kata.html).
   Please do not create a database backend for this. Test doubles should work fine.
 
-  *See `test/access_query_test.rb`*
+  *See `test/access_query_test.rb`. Run it with `ruby -I test test/access_query_test.rb`*
