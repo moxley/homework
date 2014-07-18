@@ -23,7 +23,7 @@ class SearchCandidates
   end
 
   def with_permission
-    @candidates = current_user.organization.candidates.all(:is_deleted => false, :is_completed => true)
+    @candidates = current_user.organization.candidates.where(:is_deleted => false, :is_completed => true)
     apply_order
   end
 
