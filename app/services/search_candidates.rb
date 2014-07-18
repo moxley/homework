@@ -52,13 +52,12 @@ class SearchCandidates
       candidates.each do |candidate|
         if candidate.is_deleted == false && candidate.is_completed == true && candidate.organization_id == current_user.organization_id
           found = false
-          unless @candidates.blank?
-            @candidates.each do |cand|
-              if cand.email_address == candidate.email_address
-                found = true
-              end
+          @candidates.each do |cand|
+            if cand.email_address == candidate.email_address
+              found = true
             end
           end
+
           if found == false
             @candidates << candidate
           end
