@@ -18,6 +18,13 @@ class SearchCandidates
 
   private
 
+  ORDERING = {
+    "Candidates Newest -> Oldest" => {created_at: :desc},
+    "Candidates Oldest -> Newest" => {created_at: :asc},
+    "Candidates A -> Z"           => {created_at: :asc, lname: :asc},
+    "Candidates Z -> A"           => {created_at: :asc, lname: :desc}
+  }
+
   def s_key
     @s_key ||= params[:sort].blank? ? "All Candidates" : params[:sort]
   end
@@ -31,18 +38,7 @@ class SearchCandidates
   end
 
   def ordering
-    case s_key
-    when "Candidates Newest -> Oldest"
-      {created_at: :desc}
-    when "Candidates Oldest -> Newest"
-      {created_at: :asc}
-    when "Candidates A -> Z"
-      {created_at: :asc, lname: :asc}
-    when "Candidates Z -> A"
-      {created_at: :asc, lname: :desc}
-    else
-      {}
-    end
+    ORDERING[s_key] || {}
   end
 
   def without_permission
