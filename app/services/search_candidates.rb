@@ -9,11 +9,6 @@ class SearchCandidates
   end
 
   def perform
-    s_key = params[:sort].blank? ? "All Candidates" : params[:sort]
-    @open_jobs = Job.all_open_new(current_user.organization)
-    #if current_user.old_role == "admin" || current_user.old_role == "sys.admin"
-     #changed based on new model(24/11/11)
-    #if current_user.role(:name =>"admin") || current_user.role(:name =>"sys.admin")
    if current_user.has_permission?('view_candidates')
       if s_key == "All Candidates"
         @candidates = current_user.organization.candidates.all(:is_deleted => false, :is_completed => true)
@@ -69,5 +64,11 @@ class SearchCandidates
         end
       end
     end
+  end
+
+  private
+
+  def s_key
+    @s_key ||= params[:sort].blank? ? "All Candidates" : params[:sort]
   end
 end
