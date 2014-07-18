@@ -37,22 +37,13 @@ class SearchCandidates
   end
 
   def without_permission
-    @job_contacts = JobContact.all(:user_id => current_user.id)
-    @candidates   = []
-    return if @job_contacts.present?
-
-    jobs = Job.where(id: jobs_contacts.map(&:job_id), is_deleted: false)
-    jobs.each do |job|
-      candidates = Candidate.
-        joins(:candidate_job).
-        where(candidate_jobs: {job_id: job.id}).
-        where(is_deleted:      false,
-              is_completed:    true,
-              organization_id: current_user.organization_id).
-        where("email_address NOT IN (?)", @candidates.map(&:email_address))
-
-      @candidates += candidates
-    end
+    @candidates = Candidate.
+      joins(:candidate_job, :job_contact).
+      where(:job_contact: {user_id: current_user.id}).
+      where(candidate_jobs: {job_id: job.id}).
+      where(is_deleted:      false,
+            is_completed:    true,
+            organization_id: current_user.organization_id)
 
     if s_key == "Candidates Newest -> Oldest"
       @candidates = @candidates.sort_by { |c| c.created_at }
