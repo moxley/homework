@@ -62,17 +62,17 @@ class SearchCandidates
             @candidates << candidate
           end
         end
-
-        if s_key == "Candidates Newest -> Oldest"
-          @candidates = @candidates.sort_by { |c| c.created_at }
-        elsif s_key == "Candidates Oldest -> Newest"
-          @candidates = @candidates.sort_by { |c| c.created_at }.reverse
-        elsif s_key == "Candidates A -> Z"
-          @candidates = @candidates.sort_by { |c| c.created_at }.sort! { |a, b| a.last_name <=> b.last_name }
-        elsif s_key == "Candidates Z -> A"
-          @candidates = @candidates.sort_by { |c| c.created_at }.sort! { |a, b| a.last_name <=> b.last_name }.reverse
-        end
       end
+    end
+
+    if s_key == "Candidates Newest -> Oldest"
+      @candidates = @candidates.sort_by { |c| c.created_at }
+    elsif s_key == "Candidates Oldest -> Newest"
+      @candidates = @candidates.sort_by { |c| c.created_at }.reverse
+    elsif s_key == "Candidates A -> Z"
+      @candidates = @candidates.sort_by { |c| c.created_at }.sort! { |a, b| a.last_name <=> b.last_name }
+    elsif s_key == "Candidates Z -> A"
+      @candidates = @candidates.sort_by { |c| c.created_at }.sort! { |a, b| a.last_name <=> b.last_name }.reverse
     end
   end
 end
