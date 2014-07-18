@@ -28,13 +28,14 @@ class SearchCandidates
   end
 
   def apply_order
-    if s_key == "Candidates Newest -> Oldest"
+    case s_key
+    when "Candidates Newest -> Oldest"
       @candidates = @candidates.order(created_at: :desc)
-    elsif s_key == "Candidates Oldest -> Newest"
+    when "Candidates Oldest -> Newest"
       @candidates = @candidates.order(created_at: :asc)
-    elsif s_key == "Candidates A -> Z"
+    when "Candidates A -> Z"
       @candidates = @candidates.order(created_at: :asc, lname: :asc)
-    elsif s_key == "Candidates Z -> A"
+    when "Candidates Z -> A"
       @candidates = @candidates.order(created_at: :asc, lname: :desc)
     end
   end
