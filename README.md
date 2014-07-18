@@ -42,7 +42,7 @@ There are two parts to the Software Engineer Homework set. Part 1 is written ans
   1. *Pull all the query building and record sorting code out of the
       controller to a service class (`app/services/search_candidates.rb`).
       This will make the behavior easier to test, because controllers
-      have have a cumbersome interface compared to plain old Ruby classes.
+      have a cumbersome interface compared to plain old Ruby classes.
       Besides, this action is way too big.*
   1. Break up the permission conditional into separate methods.
   1. Dry up the sorting logic.
@@ -59,6 +59,7 @@ There are two parts to the Software Engineer Homework set. Part 1 is written ans
   1. Share record sorting logic between the "has permission" and
      "hasn't permission" cases.
   1. Break out the "hasn't permission" case into multiple methods.
+  1. ...And many, many more. See the commit history for more changes.
 
 ###Part 2 - Programming Problems
 
