@@ -6,13 +6,49 @@ There are two parts to the Software Engineer Homework set. Part 1 is written ans
 
 ###Part 1 - Written Questions
 
-1. How can Memcache improve a site’s performance? Include a description about how data is stored and retrieved in a multi-node configuration.
+1. How can Memcache improve a site’s performance?
+  Include a description about how data is stored and
+  retrieved in a multi-node configuration.
 
-2. Please take a look at [this controller action](https://github.com/Hireology/homework/blob/master/some_controller.rb). Please tell us what you think of this code and how you would make it better.
+  *Memcached is a simple, fast key-value data store, good
+  for storing temporary data, such as cache data. One
+  caching use case would be to cache rendered view HTML
+  so that it doesn't have to be calculated for every
+  request. This can save CPU, memory and runtime
+  of the web application server and the database
+  server, which affects concurrency limits and
+  transaction (request) frequency limits. Another use
+  case is saving a user's session data instead of saving
+  it to a database. This saves a trip to the database,
+  which would normally take more time.*
+
+  *A multi-node Memcached cluster works essentially as a
+  distributed hash table. The keys and values of Memcached
+  are the keys and values of the hash table. Each
+  Memcached server instance holds a subset of the hash
+  table, the size of which is proportional to the amount
+  of memory allocated to the instance. As with hash tables
+  in general, the keys are translated into a hashified
+  representation which makes the keys normalized and easy
+  to be used*
+
+2. Please take a look at
+  [this controller action](https://github.com/Hireology/homework/blob/master/some_controller.rb).
+  Please tell us what you think of this code and how you
+  would make it better.
+
+  *I'll approach this from a high level, down to a low level.*
+
+  1. *Pull all the query building and record sorting code out of the
+      controller to a service class (`app/services/search_candidates.rb`).
+      This will make the behavior easier to test, because controllers
+      have have a cumbersome interface compared to plain old Ruby classes.
+      Besides, this action is way too big.*
 
 ###Part 2 - Programming Problems
 
-1) Write a program using regular expressions to parse a file where each line is of the following format:
+1) Write a program using regular expressions to parse a file where each line is
+  of the following format:
 
 `$4.99 TXT MESSAGING – 250 09/29 – 10/28 4.99`
 
