@@ -23,20 +23,25 @@ class SearchCandidates
   end
 
   def with_permission
-    @candidates = current_user.organization.candidates.where(:is_deleted => false, :is_completed => true)
-    apply_order
+    @candidates = current_user.
+      organization.
+      candidates.
+      where(:is_deleted => false, :is_completed => true).
+      order(ordering)
   end
 
-  def apply_order
-    @candidates = case s_key
+  def ordering
+    case s_key
     when "Candidates Newest -> Oldest"
-      candidates.order(created_at: :desc)
+      {created_at: :desc}
     when "Candidates Oldest -> Newest"
-      candidates.order(created_at: :asc)
+      {created_at: :asc}
     when "Candidates A -> Z"
-      candidates.order(created_at: :asc, lname: :asc)
+      {created_at: :asc, lname: :asc}
     when "Candidates Z -> A"
-      candidates.order(created_at: :asc, lname: :desc)
+      {created_at: :asc, lname: :desc}
+    else
+      {}
     end
   end
 
@@ -47,8 +52,7 @@ class SearchCandidates
       where(candidate_jobs: {job_id: job.id}).
       where(is_deleted:      false,
             is_completed:    true,
-            organization_id: current_user.organization_id)
-
-    apply_order
+            organization_id: current_user.organization_id).
+      order(ordering)
   end
 end
