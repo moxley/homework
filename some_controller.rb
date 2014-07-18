@@ -2,6 +2,7 @@ class SomeController < ApplicationController
   def show_candidates
     @open_jobs = Job.all_open_new(current_user.organization)
     search = SearchCandidates.new(current_user, params)
+    search.perform
     render :partial => "candidates_list",
            :locals => {
              :@candidates => search.candidates,
