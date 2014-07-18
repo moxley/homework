@@ -28,15 +28,15 @@ class SearchCandidates
   end
 
   def apply_order
-    case s_key
+    @candidates = case s_key
     when "Candidates Newest -> Oldest"
-      @candidates = @candidates.order(created_at: :desc)
+      @candidates.order(created_at: :desc)
     when "Candidates Oldest -> Newest"
-      @candidates = @candidates.order(created_at: :asc)
+      @candidates.order(created_at: :asc)
     when "Candidates A -> Z"
-      @candidates = @candidates.order(created_at: :asc, lname: :asc)
+      @candidates.order(created_at: :asc, lname: :asc)
     when "Candidates Z -> A"
-      @candidates = @candidates.order(created_at: :asc, lname: :desc)
+      @candidates.order(created_at: :asc, lname: :desc)
     end
   end
 
