@@ -24,7 +24,10 @@ class SearchCandidates
 
   def with_permission
     @candidates = current_user.organization.candidates.all(:is_deleted => false, :is_completed => true)
+    apply_order
+  end
 
+  def apply_order
     if s_key == "Candidates Newest -> Oldest"
       @candidates = @candidates.order(created_at: :desc)
     elsif s_key == "Candidates Oldest -> Newest"
@@ -45,14 +48,6 @@ class SearchCandidates
             is_completed:    true,
             organization_id: current_user.organization_id)
 
-    if s_key == "Candidates Newest -> Oldest"
-      @candidates = @candidates.sort_by { |c| c.created_at }
-    elsif s_key == "Candidates Oldest -> Newest"
-      @candidates = @candidates.sort_by { |c| c.created_at }.reverse
-    elsif s_key == "Candidates A -> Z"
-      @candidates = @candidates.sort_by { |c| c.created_at }.sort! { |a, b| a.last_name <=> b.last_name }
-    elsif s_key == "Candidates Z -> A"
-      @candidates = @candidates.sort_by { |c| c.created_at }.sort! { |a, b| a.last_name <=> b.last_name }.reverse
-    end
+    apply_order
   end
 end
