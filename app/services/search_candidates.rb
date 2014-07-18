@@ -54,16 +54,10 @@ class SearchCandidates
         where(candidate_jobs: {job_id: job.id}).
         where(is_deleted:      false,
               is_completed:    true,
-              organization_id: current_user.organization_id)
+              organization_id: current_user.organization_id).
+        where("email_address NOT IN (?)", @candidates.map(&:email_address))
 
-      candidates.each do |candidate|
-        dupe = false
-        @candidates.each do |cand|
-          dupe = true if cand.email_address == candidate.email_address
-        end
-
-        @candidates << candidate unless dupe
-      end
+      @candidates += candidates
     end
 
     if s_key == "Candidates Newest -> Oldest"
