@@ -1,5 +1,5 @@
 class ResourceQueries
-  def find_resource_user(user, resource_name)
-    nil
+  def resource_users(user, resource_name)
+    []
   end
 end

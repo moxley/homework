@@ -13,8 +13,17 @@ describe AccessQuery do
     end
 
     it "is :user when a ResourceUser with :user is found" do
-      resource_queries.stub :find_resource_user, resource_user do
+      resource_queries.stub :resource_users, [resource_user] do
         access_query.access_type(user, "resource_foo").must_equal :user
+      end
+    end
+
+    describe "parent resource specifies access" do
+      it "is :user when a ResourceUser with :user is found in parent" do
+        root_resource_user = ResourceUser.new(user, 'resource_root', :user)
+        resource_queries.stub :resource_users, [root_resource_user, resource_user] do
+          access_query.access_type(user, "resource_foo").must_equal :user
+        end
       end
     end
   end
