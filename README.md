@@ -44,6 +44,21 @@ There are two parts to the Software Engineer Homework set. Part 1 is written ans
       This will make the behavior easier to test, because controllers
       have have a cumbersome interface compared to plain old Ruby classes.
       Besides, this action is way too big.*
+  1. Break up the permission conditional into separate methods.
+  1. Dry up the sorting logic.
+  1. Use Rails 3/4 ActiveRecord syntax rather than Rails 2
+    1. Use `#where` instead of `#all` to add conditionals to a query.
+    2. Call `#order` instead of passing an `:order` hash element.
+  1. Fix indentation
+  1. Remove closing semi-colon
+  1. Remove commented-out code
+  1. Change the big sorting conditional to a `case` statement
+  1. Sort last name in the query, not in memory
+  1. Eliminate N+1 queries
+  1. Move `is_deleted: false` conditional to the default scope.
+  1. Share record sorting logic between the "has permission" and
+     "hasn't permission" cases.
+  1. Break out the "hasn't permission" case into multiple methods.
 
 ###Part 2 - Programming Problems
 
