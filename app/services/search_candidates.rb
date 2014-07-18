@@ -57,16 +57,12 @@ class SearchCandidates
               organization_id: current_user.organization_id)
 
       candidates.each do |candidate|
-        found = false
+        dupe = false
         @candidates.each do |cand|
-          if cand.email_address == candidate.email_address
-            found = true
-          end
+          dupe = true if cand.email_address == candidate.email_address
         end
 
-        if found == false
-          @candidates << candidate
-        end
+        @candidates << candidate unless dupe
       end
     end
 
