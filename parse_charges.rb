@@ -13,7 +13,7 @@ while s = $stdin.gets
   data = {
     "feature"    => m[1],
     "date_range" => m[2],
-    "price"     => m[3].to_f
+    "price"      => m[3].to_f
   }
   puts JSON.pretty_generate(data)
 end

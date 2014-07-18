@@ -2,7 +2,10 @@
 
 ### Instructions
 
-There are two parts to the Software Engineer Homework set. Part 1 is written answer, and Part 2 is a set of programmable problems. Please fork this repo to your GitHub account, add your work to the forked repo, and send a pull request when your work is complete.
+There are two parts to the Software Engineer Homework set. Part 1 is written
+answer, and Part 2 is a set of programmable problems. Please fork this repo to
+your GitHub account, add your work to the forked repo, and send a pull request
+when your work is complete.
 
 ### Part 1 - Written Questions
 
@@ -39,11 +42,11 @@ There are two parts to the Software Engineer Homework set. Part 1 is written ans
 
   *I'll approach this from a high level, down to a low level.*
 
-  1. *Pull all the query building and record sorting code out of the
-      controller to a service class (`app/services/search_candidates.rb`).
-      This will make the behavior easier to test, because controllers
-      have a cumbersome interface compared to plain old Ruby classes.
-      Besides, this action is way too big.*
+  1. Pull all the query building and record sorting code out of the
+     controller to a service class (`app/services/search_candidates.rb`).
+     This will make the behavior easier to test, because controllers
+     have a cumbersome interface compared to plain old Ruby classes.
+     Besides, this action is way too big.
   1. Break up the permission conditional into separate methods.
   1. Dry up the sorting logic.
   1. Use Rails 3/4 ActiveRecord syntax rather than Rails 2
@@ -88,3 +91,5 @@ There are two parts to the Software Engineer Homework set. Part 1 is written ans
 2. Please complete a set of classes for the problem described in
   [this blog post](http://www.adomokos.com/2012/10/the-organizations-users-roles-kata.html).
   Please do not create a database backend for this. Test doubles should work fine.
+
+  *See `test/access_query_test.rb`*
