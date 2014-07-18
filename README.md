@@ -1,10 +1,10 @@
-##Hireology Software Engineer Homework
+## Hireology Software Engineer Homework
 
 ### Instructions
 
 There are two parts to the Software Engineer Homework set. Part 1 is written answer, and Part 2 is a set of programmable problems. Please fork this repo to your GitHub account, add your work to the forked repo, and send a pull request when your work is complete.
 
-###Part 1 - Written Questions
+### Part 1 - Written Questions
 
 1. How can Memcache improve a site’s performance?
   Include a description about how data is stored and
@@ -61,7 +61,12 @@ There are two parts to the Software Engineer Homework set. Part 1 is written ans
   1. Break out the "hasn't permission" case into multiple methods.
   1. ...And many, many more. See the commit history for more changes.
 
-###Part 2 - Programming Problems
+  All these changes should be accompanied by tests. The homework assignment
+  didn't include tests. I started writing my own tests, but that involved
+  starting a rails project around the code, adding models and their
+  associations, and that didn't feel right, so I gave up on that.
+
+### Part 2 - Programming Problems
 
 1) Write a program using regular expressions to parse a file where each line is
   of the following format:
@@ -77,5 +82,7 @@ For each line in the input file, the program should output three pieces of infor
   “price” : 4.99 // use the last dollar amount in the line
 }
 ```
+
+*See `parse_changes.rb`*
 
 2) Please complete a set of classes for the problem described in [this blog post](http://www.adomokos.com/2012/10/the-organizations-users-roles-kata.html). Please do not create a database backend for this. Test doubles should work fine.
