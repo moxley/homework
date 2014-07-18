@@ -23,16 +23,16 @@ class SearchCandidates
   end
 
   def with_permission
-    if s_key == "All Candidates"
-      @candidates = current_user.organization.candidates.all(:is_deleted => false, :is_completed => true)
-    elsif s_key == "Candidates Newest -> Oldest"
-      @candidates = current_user.organization.candidates.all(:is_deleted => false, :is_completed => true, :order => [:created_at.desc])
+    @candidates = current_user.organization.candidates.all(:is_deleted => false, :is_completed => true)
+
+    if s_key == "Candidates Newest -> Oldest"
+      @candidates = @candidates.order(created_at: :desc)
     elsif s_key == "Candidates Oldest -> Newest"
-      @candidates = current_user.organization.candidates.all(:is_deleted => false, :is_completed => true, :order => [:created_at.asc])
+      @candidates = @candidates.order(created_at: :asc)
     elsif s_key == "Candidates A -> Z"
-      @candidates = current_user.organization.candidates.all(:is_deleted => false, :is_completed => true, :order => [:created_at.asc]).sort! { |a, b| a.last_name <=> b.last_name }
+      @candidates = @candidates.order(created_at: :asc, lname: :asc)
     elsif s_key == "Candidates Z -> A"
-      @candidates = current_user.organization.candidates.all(:is_deleted => false, :is_completed => true, :order => [:created_at.asc]).sort! { |a, b| a.last_name <=> b.last_name }.reverse
+      @candidates = @candidates.order(created_at: :asc, lname: :desc)
     end
   end
 
